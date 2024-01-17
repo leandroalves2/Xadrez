@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using tabuleiro;
+using xadrez;
 
 namespace Xadez_console
 {
@@ -32,6 +27,16 @@ namespace Xadez_console
             Console.WriteLine("  a b c d e f g h");
 
         }
+
+        public static PosicaoXadrez lerPosicaoXadrez()
+        {
+            string s = Console.ReadLine();
+            char coluna = s[0];
+            int linha  = int.Parse(s[1] + "");
+            return new PosicaoXadrez(coluna, linha);
+        }
+
+
 
         public static void imprimirpeca(Peca peca)
         {
