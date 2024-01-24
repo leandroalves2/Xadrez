@@ -8,7 +8,7 @@ namespace xadrez
 
         private PartidaXadrez partida;
 
-        public Peao(Tabuleiro tab, Cor cor) : base(tab, cor)
+        public Peao(Tabuleiro tab, Cor cor, PartidaXadrez partida) : base(tab, cor)
         {
             this.partida = partida;
         }
@@ -58,7 +58,21 @@ namespace xadrez
                 {
                     mat[pos.linha, pos.coluna] = true;
                 }
-               
+
+                // # Jogada especial En Pssant
+                if ( posicao.linha == 3)
+                {
+                    Posicao esquerda = new Posicao(posicao.linha, posicao.coluna - 1);
+                    if (tab.posicaoValida(esquerda) && existeInimigo(esquerda) && tab.peca(esquerda) == partida.vulneravelEnPssant)
+                    {
+                        mat[esquerda.linha - 1, esquerda.coluna] = true;
+                    }
+                    Posicao direita = new Posicao(posicao.linha, posicao.coluna + 1);
+                    if (tab.posicaoValida(direita) && existeInimigo(direita) && tab.peca(direita) == partida.vulneravelEnPssant)
+                    {
+                        mat[direita.linha - 1, direita.coluna] = true;
+                    }
+                }               
             }
             else
             {
@@ -83,7 +97,21 @@ namespace xadrez
                 {
                     mat[pos.linha, pos.coluna] = true;
                 }
-               
+                // # Jogada especial En Pssant
+                if (posicao.linha == 4)
+                {
+                    Posicao esquerda = new Posicao(posicao.linha, posicao.coluna - 1);
+                    if (tab.posicaoValida(esquerda) && existeInimigo(esquerda) && tab.peca(esquerda) == partida.vulneravelEnPssant)
+                    {
+                        mat[esquerda.linha +1, esquerda.coluna] = true;
+                    }
+                    Posicao direita = new Posicao(posicao.linha, posicao.coluna + 1);
+                    if (tab.posicaoValida(direita) && existeInimigo(direita) && tab.peca(direita) == partida.vulneravelEnPssant)
+                    {
+                        mat[direita.linha +1, direita.coluna] = true;
+                    }
+                }
+
             }
 
             return mat;
